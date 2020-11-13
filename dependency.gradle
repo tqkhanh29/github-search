@@ -7,6 +7,7 @@ versions.coreKtx = "1.3.2"
 versions.liveDataKtx = "2.2.0"
 versions.viewModelKtx = "2.2.0"
 versions.rooms = "2.2.5"
+versions.coroutines = "1.3.9"
 versions.junit = "4.13.1"
 versions.androidJUnit = "1.1.2"
 versions.espresscoCore = "3.3.0"
@@ -28,6 +29,7 @@ deps.liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.liveData
 deps.viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewModelKtx"
 deps.rooms = "androidx.room:room-runtime:$versions.rooms"
 deps.roomsKtx = "androidx.room:room-ktx:$versions.rooms"
+deps.coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 deps.kaps = kaps
 deps.tests = tests
 
