@@ -1,0 +1,34 @@
+def versions = [:]
+versions.appcompat = "1.2.0"
+versions.constraintLayout = "2.0.4"
+versions.material = "1.2.1"
+versions.retrofit = "2.9.0"
+versions.coreKtx = "1.3.2"
+versions.liveDataKtx = "2.2.0"
+versions.viewModelKtx = "2.2.0"
+versions.rooms = "2.2.5"
+versions.junit = "4.13.1"
+versions.androidJUnit = "1.1.2"
+versions.espresscoCore = "3.3.0"
+
+def kaps = [:]
+kaps.rooms = "androidx.room:room-compiler:$versions.rooms"
+
+def tests = [:]
+tests.junit = "junit:junit:$versions.junit"
+tests.androidJUnit = "androidx.test.ext:junit:$versions.androidJUnit"
+tests.espressco = "androidx.test.espresso:espresso-core:$versions.espresscoCore"
+
+ext.deps = [:]
+def deps = [:]
+deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.appcompat = "androidx.core:core-ktx:$versions.appcompat"
+deps.material = "com.google.android.material:material:$versions.material"
+deps.liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.liveDataKtx"
+deps.viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewModelKtx"
+deps.rooms = "androidx.room:room-runtime:$versions.rooms"
+deps.roomsKtx = "androidx.room:room-ktx:$versions.rooms"
+deps.kaps = kaps
+deps.tests = tests
+
+ext.deps = deps
