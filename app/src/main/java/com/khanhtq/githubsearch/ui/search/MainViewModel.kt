@@ -1,4 +1,4 @@
-package com.khanhtq.githubsearch.ui.main
+package com.khanhtq.githubsearch.ui.search
 
 import androidx.lifecycle.ViewModel
 

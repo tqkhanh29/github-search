@@ -2,7 +2,7 @@ package com.khanhtq.githubsearch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.khanhtq.githubsearch.ui.main.MainFragment
+import com.khanhtq.githubsearch.ui.search.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

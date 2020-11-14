@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -10,13 +10,13 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.khanhtq.githubsearch"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -37,23 +37,16 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-    implementation deps.ktxs.core
-    implementation deps.material
-    implementation deps.navigations.runtime
-    implementation deps.navigations.fragment
-    implementation deps.navigations.ui
-    implementation deps.ktxs.viewmodel
-    implementation deps.ktxs.livedata
-    implementation deps.ktxs.lifecycle
     implementation deps.hilt.core
+    implementation deps.rooms.runtime
+    implementation deps.rooms.ktx
+    implementation deps.rooms.rxjava3
     implementation deps.rxs.rxandroid
     implementation deps.rxs.rxjava3
+    implementation deps.retrofits.base
+    implementation deps.retrofits.gsonconverter
+    implementation deps.retrofits.rxjava3adapter
     implementation project(path: ':domain')
 
     kapt deps.hilt.compiler
-    kapt deps.rooms.compiler
-
-    testImplementation deps.tests.junit
-    testImplementation deps.tests.mockito
 }
