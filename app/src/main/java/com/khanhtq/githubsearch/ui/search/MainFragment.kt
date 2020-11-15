@@ -1,29 +1,15 @@
 package com.khanhtq.githubsearch.ui.search
 
-import androidx.lifecycle.ViewModelProvider
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.khanhtq.common.base.BaseFragment
 import com.khanhtq.githubsearch.R
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainFragment : Fragment() {
+@AndroidEntryPoint
+class MainFragment : BaseFragment<MainViewModel>() {
+    private val mainViewModel: MainViewModel by viewModels<MainViewModel> { viewModelFactory }
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+    override val layoutId: Int = R.layout.main_fragment
 
-    private val viewModel: MainViewModel by viewModels<MainViewModel>()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
+    override fun getViewModel(): MainViewModel = mainViewModel
 }

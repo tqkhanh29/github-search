@@ -40,19 +40,22 @@ dependencies {
 
     implementation deps.ktxs.core
     implementation deps.material
+    implementation deps.appcompat
+    implementation deps.glide.core
     implementation deps.navigations.runtime
     implementation deps.navigations.fragment
     implementation deps.navigations.ui
+    implementation deps.ktxs.fragment
     implementation deps.ktxs.viewmodel
     implementation deps.ktxs.livedata
     implementation deps.ktxs.lifecycle
     implementation deps.hilt.core
-    implementation deps.rxs.rxandroid
-    implementation deps.rxs.rxjava3
-    implementation project(path: ':domain')
+    implementation deps.coroutine
+    implementation project(path: ':core')
+    implementation project(path: ':common')
 
     kapt deps.hilt.compiler
-    kapt deps.rooms.compiler
+    kapt deps.glide.compiler
 
     testImplementation deps.tests.junit
     testImplementation deps.tests.mockito

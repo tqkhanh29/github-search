@@ -40,13 +40,13 @@ dependencies {
     implementation deps.hilt.core
     implementation deps.rooms.runtime
     implementation deps.rooms.ktx
-    implementation deps.rooms.rxjava3
-    implementation deps.rxs.rxandroid
-    implementation deps.rxs.rxjava3
+    implementation deps.coroutine
     implementation deps.retrofits.base
     implementation deps.retrofits.gsonconverter
     implementation deps.retrofits.rxjava3adapter
-    implementation project(path: ':domain')
+    implementation deps.retrofits.interceptor
+    implementation project(path: ':common')
 
     kapt deps.hilt.compiler
+    kapt deps.rooms.compiler
 }

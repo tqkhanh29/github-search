@@ -1,4 +1,4 @@
-include ':data'
-include ':domain'
+include ':common'
+include ':core'
 include ':app'
 rootProject.name = "GithubSearch"
