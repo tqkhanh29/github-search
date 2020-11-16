@@ -1,3 +1,5 @@
+include ':app:userdetail'
+include ':app:search'
 include ':common'
 include ':core'
 include ':app'

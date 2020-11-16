@@ -1,4 +1,5 @@
 def versions = [:]
+versions.constraintlayout = "2.0.4"
 versions.appcompat = "1.2.0"
 versions.constraintLayout = "2.0.4"
 versions.material = "1.2.1"
@@ -63,6 +64,7 @@ tests.espressco = "androidx.test.espresso:espresso-core:$versions.espresscoCore"
 
 ext.deps = [:]
 def dependencies = [:]
+dependencies.constraintlayout = "ndroidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 dependencies.material = "com.google.android.material:material:$versions.material"
 dependencies.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
 dependencies.coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutine"

@@ -1,6 +1,8 @@
 package com.khanhtq.core.di
 
 import com.khanhtq.core.BuildConfig
+import com.khanhtq.common.AppExecutor
+import com.khanhtq.common.Executor
 import com.khanhtq.core.data.adapter.LiveDataCallAdapterFactory
 import com.khanhtq.core.data.remote.service.UserService
 import com.khanhtq.core.data.repositories.UserRepositoryImpl
@@ -25,8 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(ApplicationComponent::class)
 abstract class DomainModule {
     @Binds
-    abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+    abstract fun bindAppExecutor(appExecutor: AppExecutor): Executor
 
+    @Binds
+    abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
 
     @Binds
     abstract fun bindSearchUserUseCase(searchUserUseCase: SearchUserUseCase): UseCase<String, List<@JvmSuppressWildcards UserEntity>>
@@ -49,7 +53,6 @@ class DataModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(LiveDataCallAdapterFactory())
         .client(okHttpClient)
         .build()
 

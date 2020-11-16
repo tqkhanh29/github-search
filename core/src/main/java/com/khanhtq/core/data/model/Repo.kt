@@ -3,6 +3,7 @@ package com.khanhtq.core.data.model
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.Index
+import androidx.room.Relation
 import com.google.gson.annotations.SerializedName
 
 @Entity(
@@ -11,7 +12,7 @@ import com.google.gson.annotations.SerializedName
         Index("owner_login")],
     primaryKeys = ["name", "owner_login"]
 )
-internal data class Repo(
+data class Repo(
     val id: Int,
     @SerializedName("name")
     val name: String,
@@ -26,14 +27,17 @@ internal data class Repo(
     val stars: Int
 ) {
 
-    internal data class Owner(
+    data class Owner(
         @SerializedName("login")
-        val login: String,
-        @SerializedName("url")
-        val url: String?
+        val login: String
     )
-
-    companion object {
-        const val UNKNOWN_ID = -1
-    }
 }
+
+data class UserWithRepos(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "login",
+        entityColumn = "owner_login"
+    )
+    val repos: List<Repo>
+)

@@ -1,4 +1,4 @@
-package com.khanhtq.core.data
+package com.khanhtq.common
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

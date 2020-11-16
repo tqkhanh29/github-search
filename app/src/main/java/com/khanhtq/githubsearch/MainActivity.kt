@@ -2,7 +2,6 @@ package com.khanhtq.githubsearch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.khanhtq.githubsearch.ui.search.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,9 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, MainFragment())
-                    .commitNow()
         }
     }
 }

@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import com.khanhtq.common.state.Resource
 import com.khanhtq.core.domain.entity.RepoEntity
 import com.khanhtq.core.domain.entity.UserEntity
+import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun search(query: String): LiveData<Resource<List<UserEntity>>>
+    fun search(query: String): Flow<Resource<List<UserEntity>>>
 
-    fun detail(userName: String): LiveData<Resource<UserEntity>>
+    fun detail(userName: String): Flow<Resource<UserEntity>>
 
-    fun repos(userName: String): LiveData<Resource<List<RepoEntity>>>
+    fun repos(userName: String): Flow<Resource<List<RepoEntity>>>
 }
