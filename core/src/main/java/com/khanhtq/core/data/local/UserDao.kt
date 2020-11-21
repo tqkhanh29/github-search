@@ -18,6 +18,12 @@ abstract class UserDao {
     abstract fun getUser(userName: String): Flow<User?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertUsers(users: List<User>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertUser(user: User)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertUserSearchResult(userSearchResult: UserSearchResult)
 
     @Query("SELECT * FROM UserSearchResult WHERE `query` = :query")

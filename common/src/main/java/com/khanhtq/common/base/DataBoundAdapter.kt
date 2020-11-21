@@ -31,5 +31,5 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
     protected abstract fun bind(binding: V, item: T)
 }
 
-class DataBoundViewHolder<out T : ViewDataBinding> constructor(val binding: T) :
+class DataBoundViewHolder<out T : ViewDataBinding>(val binding: T) :
     RecyclerView.ViewHolder(binding.root)

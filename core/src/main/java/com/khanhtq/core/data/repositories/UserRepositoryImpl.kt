@@ -10,6 +10,7 @@ import com.khanhtq.core.domain.gateway.UserRepository
 import com.khanhtq.core.domain.entity.RepoEntity
 import com.khanhtq.core.domain.entity.UserEntity
 import com.khanhtq.core.mapper.toEntity
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
@@ -18,12 +19,14 @@ class UserRepositoryImpl @Inject constructor(
     private val userService: UserService,
     private val appExecutor: Executor
 ) : UserRepository {
-    override fun search(query: String): Flow<Resource<List<UserEntity>>> = userDao
+    @FlowPreview
+    override suspend fun search(query: String): Flow<Resource<List<UserEntity>>> = userDao
         .search(query)
         .flatMapMerge { searchResult ->
             if (searchResult == null) {
-                flow<UserSearchResponse> { userService.search(query) }
+                flow { emit(userService.search(query)) }
                     .onEach { resp ->
+                        userDao.insertUsers(resp.users)
                         userDao.insertUserSearchResult(
                             UserSearchResult(
                                 query,
@@ -39,10 +42,10 @@ class UserRepositoryImpl @Inject constructor(
             }
         }
         .map { users -> users.map { it.toEntity() } }
-        .map { Resource.success(it) }
+        .map { if (it.isEmpty()) Resource.error("No data found") else Resource.success(it) }
         .flowOn(appExecutor.io())
 
-    override fun detail(userName: String): Flow<Resource<UserEntity>> = userDao
+    override suspend fun detail(userName: String): Flow<Resource<UserEntity>> = userDao
         .getUser(userName)
         .map { user ->
             user ?: userService.detail(userName)
@@ -51,7 +54,7 @@ class UserRepositoryImpl @Inject constructor(
         .flowOn(appExecutor.io())
 
 
-    override fun repos(userName: String): Flow<Resource<List<RepoEntity>>> = userDao
+    override suspend fun repos(userName: String): Flow<Resource<List<RepoEntity>>> = userDao
         .getUserWithRepos(userName)
         .map { it?.repos ?: userService.repos(userName) }
         .map { repos -> Resource.success(repos.map { it.toEntity() }) }

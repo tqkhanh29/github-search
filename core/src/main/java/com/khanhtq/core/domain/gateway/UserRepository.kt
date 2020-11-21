@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun search(query: String): Flow<Resource<List<UserEntity>>>
+    suspend fun search(query: String): Flow<Resource<List<UserEntity>>>
 
-    fun detail(userName: String): Flow<Resource<UserEntity>>
+    suspend fun detail(userName: String): Flow<Resource<UserEntity>>
 
-    fun repos(userName: String): Flow<Resource<List<RepoEntity>>>
+    suspend fun repos(userName: String): Flow<Resource<List<RepoEntity>>>
 }

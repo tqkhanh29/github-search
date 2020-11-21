@@ -29,16 +29,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.searchQueryLiveData}"
+                android:lines="1"
+                android:imeOptions="actionSearch"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listSearchResult"
+        <include
+            android:id="@+id/contentLayout"
+            layout="@layout/layout_state"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_normal" />
+            app:resource="@{viewModel.searchResultLiveData}" />
 
     </LinearLayout>
 </layout>

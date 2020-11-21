@@ -1,9 +1,10 @@
 package com.khanhtq.core.domain.interactors
 
+import androidx.lifecycle.LiveData
 import com.khanhtq.common.state.Resource
 import kotlinx.coroutines.flow.Flow
 
-abstract class UseCase<in Param, Type> where Type : Any {
+interface UseCase<in Param, Type>{
 
-    abstract suspend fun run(param: Param): Flow<Resource<Type>>
+    fun run(param: Param): LiveData<Resource<Type>>
 }

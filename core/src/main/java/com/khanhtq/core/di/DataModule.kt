@@ -1,60 +1,27 @@
 package com.khanhtq.core.di
 
+import android.content.Context
+import androidx.room.Room
 import com.khanhtq.core.BuildConfig
-import com.khanhtq.common.AppExecutor
-import com.khanhtq.common.Executor
-import com.khanhtq.core.data.adapter.LiveDataCallAdapterFactory
+import com.khanhtq.core.data.local.GithubDatabase
+import com.khanhtq.core.data.local.UserDao
 import com.khanhtq.core.data.remote.service.UserService
-import com.khanhtq.core.data.repositories.UserRepositoryImpl
-import com.khanhtq.core.domain.entity.RepoEntity
-import com.khanhtq.core.domain.entity.UserEntity
-import com.khanhtq.core.domain.interactors.GetUserDetailUseCase
-import com.khanhtq.core.domain.interactors.GetUserRepositoriesUseCase
-import com.khanhtq.core.domain.interactors.SearchUserUseCase
-import com.khanhtq.core.domain.interactors.UseCase
-import com.khanhtq.core.domain.gateway.UserRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-@InstallIn(ApplicationComponent::class)
-abstract class DomainModule {
-    @Binds
-    abstract fun bindAppExecutor(appExecutor: AppExecutor): Executor
-
-    @Binds
-    abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
-
-    @Binds
-    abstract fun bindSearchUserUseCase(searchUserUseCase: SearchUserUseCase): UseCase<String, List<@JvmSuppressWildcards UserEntity>>
-
-    @Binds
-    abstract fun bindUserDetailUseCase(getUserDetailUseCase: GetUserDetailUseCase): UseCase<String, UserEntity>
-
-    @Binds
-    abstract fun bindGetUserRepositoriesUseCase(getUserRepositoriesUseCase: GetUserRepositoriesUseCase): UseCase<String, List<@JvmSuppressWildcards RepoEntity>>
-}
-
-@Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class DataModule {
     companion object {
         private const val BASE_URL = "https://api.github.com/"
     }
-
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient)
-        .build()
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
@@ -68,6 +35,23 @@ class DataModule {
         .build()
 
     @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
+    @Provides
     fun provideUserService(retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
+
+    @Provides
+    fun provideLocalDatabase(@ApplicationContext applicationContext: Context): GithubDatabase =
+        Room.databaseBuilder(
+            applicationContext,
+            GithubDatabase::class.java, "github"
+        ).build()
+
+    @Provides
+    fun provideUserDao(githubDatabase: GithubDatabase): UserDao = githubDatabase.userDao()
 }

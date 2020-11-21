@@ -46,6 +46,8 @@ dependencies {
     implementation deps.material
     implementation deps.appcompat
     implementation deps.hilt.core
+    implementation deps.glide.core
 
     kapt deps.hilt.compiler
+    kapt deps.glide.compiler
 }

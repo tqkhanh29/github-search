@@ -19,6 +19,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        dataBinding true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,17 +43,17 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation deps.ktxs.core
-    implementation deps.material
-    implementation deps.appcompat
-    implementation deps.glide.core
     implementation deps.navigations.runtime
     implementation deps.navigations.fragment
     implementation deps.navigations.ui
-    implementation deps.ktxs.fragment
-    implementation deps.ktxs.viewmodel
-    implementation deps.ktxs.livedata
-    implementation deps.ktxs.lifecycle
     implementation deps.hilt.core
+    implementation deps.rooms.runtime
+    implementation deps.rooms.ktx
+    implementation deps.coroutine
+    implementation deps.retrofits.base
+    implementation deps.retrofits.gsonconverter
+    implementation deps.retrofits.rxjava3adapter
+    implementation deps.retrofits.interceptor
     implementation deps.coroutine
     implementation project(path: ':core')
     implementation project(path: ':common')
@@ -57,7 +61,6 @@ dependencies {
     implementation project(path: ':app:userdetail')
 
     kapt deps.hilt.compiler
-    kapt deps.glide.compiler
 
     testImplementation deps.tests.junit
     testImplementation deps.tests.mockito
