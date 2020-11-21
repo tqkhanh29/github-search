@@ -1,4 +1,4 @@
-package com.khanhtq.search
+package com.khanhtq.githubsearch.ui.search
 
 import androidx.lifecycle.*
 import com.khanhtq.common.state.Resource

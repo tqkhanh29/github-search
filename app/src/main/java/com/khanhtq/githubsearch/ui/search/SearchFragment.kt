@@ -1,4 +1,4 @@
-package com.khanhtq.search
+package com.khanhtq.githubsearch.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.khanhtq.common.state.Status
-import com.khanhtq.search.databinding.FragmentSearchBinding
+import com.khanhtq.githubsearch.R
+import com.khanhtq.githubsearch.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,17 +43,19 @@ class SearchFragment : Fragment() {
         }
         viewDataBinding.viewModel = viewModel
         viewDataBinding.executePendingBindings()
-        sharedElementReturnTransition =
-            TransitionInflater.from(requireContext()).inflateTransition(
-                com.khanhtq.common.R.transition.move
-            )
         return viewDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userAdapter = UserAdapter(this) { userEntity, imageView ->
-
+            val extras = FragmentNavigatorExtras(imageView to userEntity.userName)
+            findNavController().navigate(
+                SearchFragmentDirections.showProfile(
+                    userEntity.userName,
+                    userEntity.avatar
+                ), extras
+            )
         }
         viewDataBinding.contentLayout.listView.run {
             adapter = userAdapter

@@ -1,22 +1,22 @@
-package com.khanhtq.search
+package com.khanhtq.githubsearch.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.khanhtq.common.base.DataBoundListAdapter
 import com.khanhtq.core.domain.entity.UserEntity
-import com.khanhtq.search.databinding.ItemUserBinding
+import com.khanhtq.githubsearch.R
+import com.khanhtq.githubsearch.databinding.ItemUserBinding
 
 class UserAdapter(
     private val fragment: Fragment,
     private val itemClickCallback: (UserEntity, ImageView) -> Unit
-): DataBoundListAdapter<UserEntity, ItemUserBinding>(
-    diffCallback = object :DiffUtil.ItemCallback<UserEntity>() {
+) : DataBoundListAdapter<UserEntity, ItemUserBinding>(
+    diffCallback = object : DiffUtil.ItemCallback<UserEntity>() {
         override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity): Boolean {
             return oldItem.userName == newItem.userName
         }

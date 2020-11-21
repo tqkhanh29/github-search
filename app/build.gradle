@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -43,13 +44,20 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     implementation deps.ktxs.core
+    implementation deps.constraintlayout
+    implementation deps.material
+    implementation deps.appcompat
+    implementation deps.glide.core
+    implementation deps.ktxs.fragment
+    implementation deps.ktxs.viewmodel
+    implementation deps.ktxs.livedata
+    implementation deps.ktxs.lifecycle
     implementation deps.navigations.runtime
     implementation deps.navigations.fragment
     implementation deps.navigations.ui
     implementation deps.hilt.core
     implementation deps.rooms.runtime
     implementation deps.rooms.ktx
-    implementation deps.coroutine
     implementation deps.retrofits.base
     implementation deps.retrofits.gsonconverter
     implementation deps.retrofits.rxjava3adapter
@@ -57,8 +65,6 @@ dependencies {
     implementation deps.coroutine
     implementation project(path: ':core')
     implementation project(path: ':common')
-    implementation project(path: ':app:search')
-    implementation project(path: ':app:userdetail')
 
     kapt deps.hilt.compiler
 

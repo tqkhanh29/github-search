@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.khanhtq.search.SearchViewModel" />
+            type="com.khanhtq.githubsearch.ui.search.SearchViewModel" />
     </data>
 
     <LinearLayout

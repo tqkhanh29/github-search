@@ -45,18 +45,32 @@ class UserRepositoryImpl @Inject constructor(
         .map { if (it.isEmpty()) Resource.error("No data found") else Resource.success(it) }
         .flowOn(appExecutor.io())
 
-    override suspend fun detail(userName: String): Flow<Resource<UserEntity>> = userDao
-        .getUser(userName)
-        .map { user ->
-            user ?: userService.detail(userName)
-        }
-        .map { Resource.success(it.toEntity()) }
-        .flowOn(appExecutor.io())
+    override suspend fun detail(userName: String): Flow<Resource<UserEntity>> =
+        flow { emit(userService.detail(userName)) }
+            .onEach { newUsr ->
+                userDao.insertUser(newUsr)
+            }
+            .map { Resource.success(it.toEntity()) }
+            .flowOn(appExecutor.io())
 
 
     override suspend fun repos(userName: String): Flow<Resource<List<RepoEntity>>> = userDao
         .getUserWithRepos(userName)
-        .map { it?.repos ?: userService.repos(userName) }
-        .map { repos -> Resource.success(repos.map { it.toEntity() }) }
+        .flatMapMerge { userWithRepos ->
+            if (userWithRepos == null) {
+                flow { emit(userService.repos(userName)) }
+                    .onEach {
+                        userDao.insertRepos(it)
+                    }
+            } else {
+                flow { emit(userWithRepos.repos) }
+            }
+        }
+        .map { repos ->
+            if (repos.isEmpty())
+                Resource.error("No repository found for this user")
+            else
+                Resource.success(repos.map { it.toEntity() })
+        }
         .flowOn(appExecutor.io())
 }

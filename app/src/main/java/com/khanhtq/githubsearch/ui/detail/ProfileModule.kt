@@ -1,4 +1,4 @@
-package com.khanhtq.search
+package com.khanhtq.githubsearch.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.khanhtq.common.di.ViewModelKey
@@ -10,10 +10,10 @@ import dagger.multibindings.IntoMap
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class SearchModule {
+abstract class ProfileModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchViewModel::class)
-    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 }

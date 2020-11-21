@@ -2,6 +2,7 @@ package com.khanhtq.core.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.khanhtq.core.data.model.Repo
 import com.khanhtq.core.data.model.User
 import com.khanhtq.core.data.model.UserSearchResult
 import com.khanhtq.core.data.model.UserWithRepos
@@ -19,6 +20,9 @@ abstract class UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertUsers(users: List<User>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertRepos(repos: List<Repo>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertUser(user: User)

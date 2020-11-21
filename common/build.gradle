@@ -43,6 +43,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation deps.ktxs.core
     implementation deps.ktxs.livedata
+    implementation deps.navigations.runtime
+    implementation deps.navigations.fragment
+    implementation deps.navigations.ui
     implementation deps.material
     implementation deps.appcompat
     implementation deps.hilt.core
