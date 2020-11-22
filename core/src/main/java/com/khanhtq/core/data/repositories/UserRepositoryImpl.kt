@@ -56,14 +56,14 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun repos(userName: String): Flow<Resource<List<RepoEntity>>> = userDao
         .getUserWithRepos(userName)
-        .flatMapMerge { userWithRepos ->
-            if (userWithRepos == null) {
+        .flatMapMerge { repos ->
+            if (repos == null || repos.isEmpty()) {
                 flow { emit(userService.repos(userName)) }
                     .onEach {
                         userDao.insertRepos(it)
                     }
             } else {
-                flow { emit(userWithRepos.repos) }
+                flow { emit(repos) }
             }
         }
         .map { repos ->

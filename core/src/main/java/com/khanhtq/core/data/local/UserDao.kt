@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.Flow
 abstract class UserDao {
 
     @Transaction
-    @Query("SELECT * FROM User WHERE login IS :userName ")
-    abstract fun getUserWithRepos(userName: String): Flow<UserWithRepos?>
+    @Query("SELECT * FROM Repo WHERE owner_login IS :userName")
+    abstract fun getUserWithRepos(userName: String): Flow<List<Repo>?>
 
     @Query("SELECT * FROM User WHERE login IS :userName")
     abstract fun getUser(userName: String): Flow<User?>

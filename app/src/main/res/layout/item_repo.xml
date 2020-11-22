@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="com.khanhtq.core.domain.entity.RepoEntity" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal">
+
+            <TextView
+                android:id="@+id/txtStar"
+                android:layout_width="@dimen/avatar_img_size"
+                android:layout_height="@dimen/avatar_img_size"
+                android:drawableTint="@android:color/holo_blue_light"
+                android:gravity="center"
+                android:padding="@dimen/padding_normal"
+                android:text="@{String.valueOf(repo.star)}"
+                android:textColor="@android:color/holo_blue_light"
+                android:textStyle="bold"
+                app:drawableTopCompat="@drawable/ic_star_rate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1211" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{repo.name}"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txtStar"
+                app:layout_constraintTop_toTopOf="@id/txtStar"
+                tools:text="RxJava" />
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="@{repo.desc}"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txtStar"
+                app:layout_constraintTop_toBottomOf="@id/txtName"
+                tools:text="ReactiveX library for Java" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

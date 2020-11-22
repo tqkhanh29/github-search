@@ -6,15 +6,16 @@ import com.khanhtq.core.domain.entity.RepoEntity
 import com.khanhtq.core.domain.entity.UserEntity
 
 fun User.toEntity(): UserEntity = UserEntity(
-    userName = this.login,
-    realName = this.name,
-    avatar = this.avatarUrl,
-    company = this.company,
-    blog = this.blog
+        userName = this.login,
+        realName = this.name,
+        avatar = this.avatarUrl,
+        company = this.company,
+        blog = this.blog
 )
 
 fun Repo.toEntity(): RepoEntity = RepoEntity(
-    name = fullName,
-    desc = description,
-    star = stars
+        id = id,
+        name = fullName,
+        desc = description,
+        star = stars
 )

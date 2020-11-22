@@ -14,7 +14,7 @@ interface UserService {
     @GET("search/users")
     suspend fun search(@Query("q") query: String): UserSearchResponse
 
-    @GET("user/{username}")
+    @GET("users/{username}")
     suspend fun detail(@Path("username") userName: String): User
 
     @GET("users/{owner}/repos")
